@@ -1,31 +1,62 @@
 package com.apirestsap.apirestsap.entitys;
 
-public class UsersModel {
-    private int USERID;
-    private String USER_CODE;
-    private String U_NAME;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-    public int getUSERID() {
-        return USERID;
+@Entity
+@Table(name = "OUSR")
+
+public class UsersModel {
+    @Id
+    @GeneratedValue
+    @Column(name = "USERID")
+    private int id;
+
+    @Column(name = "USER_CODE")
+    private String password;
+
+    @Column(name = "U_NAME")
+    private String user;
+
+    public UsersModel() {
     }
-    public void setUSERID(int uSERID) {
-        USERID = uSERID;
+
+    public UsersModel(int id, String password, String user) {
+        this.id = id;
+        this.password = password;
+        this.user = user;
     }
-    public String getUSER_CODE() {
-        return USER_CODE;
+
+    public int getId() {
+        return id;
     }
-    public void setUSER_CODE(String uSER_CODE) {
-        USER_CODE = uSER_CODE;
+
+    public void setId(int id) {
+        this.id = id;
     }
-    public String getU_NAME() {
-        return U_NAME;
+
+    public String getPassword() {
+        return password;
     }
-    public void setU_NAME(String u_NAME) {
-        U_NAME = u_NAME;
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 
     @Override
     public String toString() {
-        return "Users [USERID=" + USERID + ", USER_CODE=" + USER_CODE + ", U_NAME=" + U_NAME + "]";
-    }    
+        return "UsersModel [id=" + id + ", password=" + password + ", user=" + user + "]";
+    }
 }

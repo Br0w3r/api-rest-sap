@@ -3,10 +3,12 @@ package com.apirestsap.apirestsap.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.apirestsap.apirestsap.dao.UserDao;
 import com.apirestsap.apirestsap.entitys.UsersModel;
 
+@Service
 public class UserServiceImpl implements UserService {
     
     @Autowired
@@ -20,20 +22,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UsersModel findById(int id) {
-        // TODO Auto-generated method stub
-        return null;
+        UsersModel user = userDao.findById(id);
+        return user;
     }
 
     @Override
     public void save(UsersModel user) {
-        // TODO Auto-generated method stub
-        
+        userDao.save(user);
     }
 
     @Override
     public void deleteById(int id) {
-        // TODO Auto-generated method stub
-        
+        userDao.deleteById(id);
     }
 
 

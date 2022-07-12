@@ -5,6 +5,7 @@ import java.util.List;
 import com.apirestsap.apirestsap.entitys.UsersModel;
 
 public interface UserService {
+    
     public List<UsersModel> findAll();
 
     public UsersModel findById(int id);

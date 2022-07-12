@@ -1,12 +1,16 @@
 package com.apirestsap.apirestsap.dao;
 
 import java.util.List;
-import org.hibernate.Session;
 import javax.persistence.EntityManager;
+
+import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import com.apirestsap.apirestsap.entitys.UsersModel;
 
+@Repository
 public class UserDaoImpl implements UserDao {
     
     @Autowired
@@ -22,20 +26,23 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public UsersModel findById(int id) {
-        // TODO Auto-generated method stub
-        return null;
+        Session curreSession = entityManager.unwrap(Session.class);
+        UsersModel usersModel = curreSession.get(UsersModel.class, id);
+        return usersModel;
     }
 
     @Override
     public void save(UsersModel user) {
-        // TODO Auto-generated method stub
-        
+        Session curreSession = entityManager.unwrap(Session.class);
+        curreSession.saveOrUpdate(user);
     }
 
     @Override
     public void deleteById(int id) {
-        // TODO Auto-generated method stub
-        
+        Session currentSession = entityManager.unwrap(Session.class);
+        Query<UsersModel> theQuery = currentSession.createQuery("delete from OUSR where USERID=:id");
+        theQuery.setParameter("USERID", id);
+        theQuery.executeUpdate();
     }
 
 }
