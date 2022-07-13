@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.apirestsap.apirestsap.entitys.UsersModel;
 import com.apirestsap.apirestsap.services.UserServiceImpl;
@@ -26,8 +27,8 @@ public class UsersRest {
     @Autowired
     private UserServiceImpl userService;
 
-    @PostMapping("/users")
-    public List<UsersModel> loginUser(@RequestBody String email, String password) {
+    @PostMapping("/userLogin")
+    public List<UsersModel> loginUser(@RequestBody @RequestParam("user") String email, @RequestParam("pass") String password) {
         List<UsersModel> users = userService.findAll();
         List<UsersModel> userFound = new ArrayList<UsersModel>();
 
