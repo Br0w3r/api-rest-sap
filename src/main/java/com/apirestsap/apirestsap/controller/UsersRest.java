@@ -1,5 +1,6 @@
 package com.apirestsap.apirestsap.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.apirestsap.apirestsap.entitys.UsersModel;
 import com.apirestsap.apirestsap.services.UserServiceImpl;
 
+
 @RestController
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.PUT,RequestMethod.POST})
 @RequestMapping("/api")
@@ -23,6 +25,20 @@ public class UsersRest {
     //Inyeccion de servicio
     @Autowired
     private UserServiceImpl userService;
+
+    @PostMapping("/users")
+    public List<UsersModel> loginUser(@RequestBody String email, String password) {
+        List<UsersModel> users = userService.findAll();
+        List<UsersModel> userFound = new ArrayList<UsersModel>();
+
+        users.forEach(item -> {
+            if(item.getUser().equals(email) && item.getPassword().equals(password)) {
+                userFound.add(item);
+            }
+        });
+
+        return userFound;
+    }
 
     @GetMapping("/users")
     public List<UsersModel> findAll() {
