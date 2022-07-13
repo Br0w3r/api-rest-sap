@@ -19,8 +19,8 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List<UsersModel> findAll() {
         Session currentSession = entityManager.unwrap(Session.class);
-        Query<UsersModel> query = currentSession.createQuery("from OUSR", UsersModel.class);
-        List<UsersModel> users = query.getResultList();
+        Query<UsersModel> theQuery = currentSession.createQuery("from UsersModel", UsersModel.class);
+        List<UsersModel> users = theQuery.getResultList();
         return users;
     }
 
@@ -40,8 +40,8 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void deleteById(int id) {
         Session currentSession = entityManager.unwrap(Session.class);
-        Query<UsersModel> theQuery = currentSession.createQuery("delete from OUSR where USERID=:id");
-        theQuery.setParameter("USERID", id);
+        Query<UsersModel> theQuery = currentSession.createQuery("delete from UsersModel where id=:idUser");
+        theQuery.setParameter("idUser", id);
         theQuery.executeUpdate();
     }
 
